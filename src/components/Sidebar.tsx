@@ -56,7 +56,7 @@ export default function Sidebar({ activeTopicId }: { activeTopicId?: string }) {
                                     {unit.topics?.map(topic => (
                                         <li key={topic.id} style={{ marginBottom: '4px' }}>
                                             <Link
-                                                href={`/topic/${topic.id}`}
+                                                href={`/study/robotics/topic/${topic.id}`}
                                                 className={topic.id === activeTopicId ? 'active-topic-link' : ''}
                                                 style={{
                                                     padding: '8px 12px',

@@ -760,3 +760,29 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* NEO-BRUTALIST FONT OVERRIDES (Tailwind System Stack & Weights) */
+* {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+body, p, a, span, div, button, li, .pill-item, .nav-item, .topic-title, .topic-badge {
+  font-weight: 700 !important; /* Tailwind font-bold */
+}
+
+h1, h2, h3, h4, h5, h6, .logo-bubble, .logo-text, strong, .hero h1 {
+  font-weight: 800 !important; /* Tailwind font-extrabold */
+}
+
+/* Base utility classes for future reference */
+.font-sans {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.font-bold {
+  font-weight: 700 !important;
+}
+
+.font-extrabold {
+  font-weight: 800 !important;
+}

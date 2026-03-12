@@ -61,7 +61,7 @@ export default async function TopicPage(props: TopicPageProps) {
             {/* Main Content */}
             <div className="topic-content">
                 <div className="breadcrumbs">
-                    <Link href="/">All Study Guides</Link> &gt; <span>Robotics</span> &gt; <Link href={`/unit/${currentUnit.number}`}>Unit {currentUnit.number}</Link> &gt; <span>Topic: {currentTopic.id}</span>
+                    <Link href="/">Home</Link> &gt; <Link href="/study/robotics">Robotics</Link> &gt; <Link href={`/study/robotics/unit/${currentUnit.number}`}>Unit {currentUnit.number}</Link> &gt; <span>Topic: {currentTopic.id}</span>
                 </div>
 
                 <div className="topic-header">
@@ -109,17 +109,17 @@ export default async function TopicPage(props: TopicPageProps) {
                 {/* Fixed Navigation Footer */}
                 <div className="nav-footer-fixed">
                     {prevTopic ? (
-                        <Link href={`/topic/${prevTopic.id}`} className="nav-btn-fixed">
+                        <Link href={`/study/robotics/topic/${prevTopic.id}`} className="nav-btn-fixed">
                             {prevTopic.id} ← back
                         </Link>
                     ) : (
-                        <Link href={`/unit/${currentUnit.number}`} className="nav-btn-fixed">
+                        <Link href={`/study/robotics/unit/${currentUnit.number}`} className="nav-btn-fixed">
                             Unit {currentUnit.number} ← back
                         </Link>
                     )}
 
                     {nextTopic ? (
-                        <Link href={`/topic/${nextTopic.id}`} className="nav-btn-fixed">
+                        <Link href={`/study/robotics/topic/${nextTopic.id}`} className="nav-btn-fixed">
                             next → {nextTopic.id}
                         </Link>
                     ) : (

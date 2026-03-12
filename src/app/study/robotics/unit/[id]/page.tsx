@@ -39,7 +39,7 @@ export default async function UnitPage(props: UnitPageProps) {
     return (
         <div>
             <div className="breadcrumbs">
-                <Link href="/">All Study Guides</Link> &gt; <span>Robotics</span> &gt; <span>Unit {unit.number}</span>
+                <Link href="/">Home</Link> &gt; <Link href="/study/robotics">Robotics</Link> &gt; <span>Unit {unit.number}</span>
             </div>
 
             <div className="unit-section" style={{ borderBottom: 'none' }}>
@@ -49,7 +49,7 @@ export default async function UnitPage(props: UnitPageProps) {
 
                 <div className="unit-topics-grid">
                     {unit.topics?.map((topic) => (
-                        <Link key={topic.id} href={`/topic/${topic.id}`} className="topic-card">
+                        <Link key={topic.id} href={`/study/robotics/topic/${topic.id}`} className="topic-card">
                             <span className="topic-badge">{topic.id}</span>
                             <span className="topic-title">{topic.title}</span>
                         </Link>
@@ -62,7 +62,7 @@ export default async function UnitPage(props: UnitPageProps) {
             {/* Navigation Footer */}
             <div className="nav-footer">
                 {prevUnit ? (
-                    <Link href={`/unit/${prevUnit.number}`} className="nav-btn">
+                    <Link href={`/study/robotics/unit/${prevUnit.number}`} className="nav-btn">
                         ← Back
                     </Link>
                 ) : (
@@ -70,7 +70,7 @@ export default async function UnitPage(props: UnitPageProps) {
                 )}
 
                 {nextUnit ? (
-                    <Link href={`/unit/${nextUnit.number}`} className="nav-btn">
+                    <Link href={`/study/robotics/unit/${nextUnit.number}`} className="nav-btn">
                         Next →
                     </Link>
                 ) : (
