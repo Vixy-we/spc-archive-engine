@@ -113,7 +113,10 @@ function DetailView({ item, categoryIcon, categoryName, onBack }: { item: Hardwa
 
             <div style={{ backgroundColor: 'white', border: '3px solid black', borderRadius: '24px', boxShadow: '12px 12px 0 0 #000', overflow: 'hidden' }}>
                 {/* Header Bar */}
-                <div style={{ padding: '32px', borderBottom: '3px solid black', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px', backgroundColor: item.color }}>
+                <div 
+                    className="detail-header-bar"
+                    style={{ backgroundColor: item.color }}
+                >
                     <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', fontSize: '0.875rem', opacity: 0.8, marginBottom: '8px' }}>
                             <span>{categoryIcon}</span>
@@ -126,7 +129,7 @@ function DetailView({ item, categoryIcon, categoryName, onBack }: { item: Hardwa
                     </div>
                 </div>
 
-                <div style={{ padding: '32px', display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '40px' }}>
+                <div className="handbook-detail-grid detail-content-padding" style={{ padding: '32px' }}>
                     {/* Left Column: Image & Quick Stats */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                         <div style={{ aspectRatio: '1', backgroundColor: '#f4f4f5', border: '3px solid black', borderRadius: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', textAlign: 'center' }}>
@@ -298,7 +301,7 @@ export default function HandbookDigestPage() {
             </div>
 
             {/* Content Container */}
-            <div className="general-info-section" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+            <div className="general-info-section" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 {!selectedItem ? (
                     /* --- LIST VIEW --- */
                     <div>
@@ -326,7 +329,7 @@ export default function HandbookDigestPage() {
                                 </div>
 
                                 {/* Equipment Grid */}
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '24px' }}>
+                                <div className="handbook-grid">
                                     {categoryData.items.map((item) => (
                                         <div
                                             key={item.id}

@@ -14,6 +14,11 @@ body {
   background-color: var(--bg-blue);
   /* Default for home/unit pages */
   color: var(--text-black);
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 /* Navbar */
@@ -42,6 +47,13 @@ body {
   margin: 0 auto;
   padding: 100px 20px 80px 20px;
   /* Top padding for navbar, Bottom for nav buttons */
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 80px 12px 60px 12px;
+  }
 }
 
 /* ... (keep other styles) ... */
@@ -255,7 +267,7 @@ body {
 /* ── Mobile Responsive Navbar ── */
 @media (max-width: 768px) {
   .navbar {
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 0.8rem; /* Further reduced to feel full-width */
   }
 
   .hamburger-btn {
@@ -341,6 +353,57 @@ body {
 
 .nav-item:hover .dropdown-menu {
   display: block;
+}
+/* ── Handbook Digest Responsive Grid ── */
+.handbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .handbook-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* ── Handbook Detail View Layout ── */
+.handbook-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .handbook-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.detail-header-bar {
+  padding: 32px;
+  border-bottom: 3px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .detail-header-bar {
+    padding: 24px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .detail-content-padding {
+    padding: 24px 20px !important;
+  }
 }
 
 .dropdown-item {
@@ -961,6 +1024,13 @@ body {
 @media (max-width: 768px) {
   .grid-2-col {
     grid-template-columns: 1fr;
+  }
+  .general-info-section {
+    padding: 0 10px !important;
+  }
+  .hero h1 {
+    font-size: 2.5rem !important;
+    text-align: center;
   }
 }
 
