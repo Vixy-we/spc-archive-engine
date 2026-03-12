@@ -841,3 +841,28 @@ h1, h2, h3, h4, h5, h6, .logo-bubble, .logo-text, strong, .hero h1 {
 .font-extrabold {
   font-weight: 800 !important;
 }
+
+/* Handbook Digest equipment card — neo-brutalist hover */
+.handbook-card {
+  background: white;
+  border: 3px solid black;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  box-shadow: 6px 6px 0 0 #000;
+  transition: all 0.2s ease;
+}
+
+.handbook-card:hover {
+  transform: translate(-6px, -6px);
+  box-shadow: 10px 10px 0 0 #000;
+}
+
+.handbook-card:hover h3 {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
