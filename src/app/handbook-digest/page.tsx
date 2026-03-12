@@ -304,20 +304,26 @@ export default function HandbookDigestPage() {
                     <div>
                         {hardwareData.map((categoryData, i) => (
                             <div key={i} style={{ marginBottom: '60px' }}>
-                                {/* Section Header */}
-                                <h2 style={{
-                                    fontSize: '1.8rem',
-                                    fontWeight: 900,
-                                    letterSpacing: '-0.5px',
-                                    marginBottom: '24px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '12px',
-                                    color: 'black'
+                                {/* Category Header */}
+                                <div style={{
+                                    display: 'inline-block',
+                                    backgroundColor: 'white',
+                                    border: '3px solid black',
+                                    padding: '12px 24px',
+                                    borderRadius: '16px',
+                                    boxShadow: '4px 4px 0 0 #000',
+                                    marginBottom: '32px',
+                                    transform: 'rotate(-1deg)'
                                 }}>
-                                    <span style={{ fontSize: '1rem', lineHeight: 1 }}>●</span>
-                                    <span>{categoryData.category.replace(/ /g, '_')}</span>
-                                </h2>
+                                    <h2 style={{
+                                        fontSize: '1.5rem',
+                                        fontWeight: 900,
+                                        letterSpacing: '-0.5px',
+                                        margin: 0
+                                    }}>
+                                        {categoryData.category}
+                                    </h2>
+                                </div>
 
                                 {/* Equipment Grid */}
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '24px' }}>
@@ -351,17 +357,35 @@ export default function HandbookDigestPage() {
                                                 <h3 style={{ fontSize: '1.2rem', fontWeight: 900, lineHeight: 1.2, margin: 0 }}>
                                                     {item.name}
                                                 </h3>
-                                                <span style={{
-                                                    background: item.color,
-                                                    padding: '4px 12px',
-                                                    borderRadius: '20px',
-                                                    fontSize: '0.75rem',
-                                                    fontWeight: 'bold',
-                                                    border: '1px solid black',
-                                                    display: 'inline-block'
-                                                }}>
-                                                    {item.badge}
-                                                </span>
+                                                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                                                    <span style={{
+                                                        background: item.color,
+                                                        padding: '4px 12px',
+                                                        borderRadius: '20px',
+                                                        fontSize: '0.75rem',
+                                                        fontWeight: 'bold',
+                                                        border: '1px solid black',
+                                                        display: 'inline-block'
+                                                    }}>
+                                                        {item.badge}
+                                                    </span>
+                                                    <span style={{
+                                                        background: '#1e1e2e',
+                                                        color: '#a6accd',
+                                                        padding: '4px 12px',
+                                                        borderRadius: '20px',
+                                                        fontSize: '0.75rem',
+                                                        fontWeight: 'bold',
+                                                        display: 'inline-block'
+                                                    }}>
+                                                        💰 {item.price}
+                                                    </span>
+                                                </div>
+                                                {enrichment[item.id]?.oneLiner && (
+                                                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#555', lineHeight: 1.4 }}>
+                                                        {enrichment[item.id].oneLiner}
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                     ))}
