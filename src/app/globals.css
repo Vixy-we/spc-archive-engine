@@ -599,6 +599,57 @@ body {
   box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
+.span-3 {
+  grid-column: span 3;
+}
+
+@media (max-width: 900px) {
+  .span-3 {
+    grid-column: span 12;
+  }
+}
+
+.action-btn {
+    border: 3px solid black;
+    border-radius: 12px;
+    font-weight: 800 !important;
+    transition: all 0.2s;
+    box-shadow: 4px 4px 0px rgba(0,0,0,1);
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.action-btn:hover {
+    box-shadow: 6px 6px 0px rgba(0,0,0,1);
+    transform: translate(-2px, -2px);
+}
+.action-btn:active {
+    box-shadow: 0px 0px 0px rgba(0,0,0,1);
+    transform: translate(2px, 2px);
+}
+
+.hover-lift {
+    border: 3px solid black;
+    border-radius: 16px;
+    box-shadow: 6px 6px 0px rgba(0,0,0,1) !important;
+    transition: all 0.2s;
+}
+.hover-lift:hover {
+    box-shadow: 12px 12px 0px rgba(0,0,0,1) !important;
+    transform: translateY(-6px);
+}
+
+.card-base.hover-lift:hover .card-arrow {
+    opacity: 1 !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .card-white {
   background: white;
 }
@@ -721,17 +772,17 @@ body {
 .info-block {
   background: white;
   border: 3px solid var(--border-black);
-  border-radius: 8px;
+  border-radius: 16px; /* Matched to hero page cards */
   padding: 30px;
   margin-bottom: 30px;
-  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
   transition: transform 0.2s;
   cursor: default;
 }
 
 .info-block:hover {
-  transform: translateY(-2px);
-  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 1);
 }
 
 .info-block h2 {
@@ -768,6 +819,10 @@ body {
 
 body, p, a, span, div, button, li, .pill-item, .nav-item, .topic-title, .topic-badge {
   font-weight: 700 !important; /* Tailwind font-bold */
+}
+
+a {
+  text-decoration: none !important;
 }
 
 h1, h2, h3, h4, h5, h6, .logo-bubble, .logo-text, strong, .hero h1 {

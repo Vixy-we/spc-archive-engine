@@ -28,13 +28,16 @@ export default function TechPage() {
             </div>
 
             {/* Content Grid */}
-            <div className="general-info-section" style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
-                <div className="grid-2-col">
+            <div className="general-info-section" style={{ maxWidth: '1000px', margin: '40px auto', padding: '0 20px', width: '100%' }}>
+                <div className="bento-grid">
                     {fields.map((field) => (
-                        <Link href={field.path} key={field.id} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
-                            <div className="info-block" style={{ cursor: 'pointer' }}>
-                                <h2 style={{ fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    {field.title}
+                        <Link href={field.path} key={field.id} style={{ textDecoration: 'none', color: 'inherit' }} className="span-6">
+                            <div className="card-base card-white" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }}>
+                                <div style={{ fontSize: '3rem', marginBottom: '15px' }}>
+                                    {field.title.split(' ')[0]}
+                                </div>
+                                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '10px' }}>
+                                    {field.title.split(' ').slice(1).join(' ')}
                                 </h2>
                                 <p>
                                     {field.description}
