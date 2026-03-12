@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { enrichment } from '@/lib/handbookEnrichment';
 
 // Enriched data model matching references/menu.jsx
 const hardwareData = [
@@ -141,27 +142,112 @@ function DetailView({ item, categoryIcon, categoryName, onBack }: { item: Hardwa
                                     <span>Classification</span><span>{item.badge}</span>
                                 </li>
                                 <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(0,0,0,0.2)', paddingBottom: '4px', fontWeight: 'bold', fontSize: '0.875rem' }}>
-                                    <span>Reusability</span><span>High</span>
+                                    <span>Reusability</span><span>{enrichment[item.id]?.reusability ?? 'High'}</span>
                                 </li>
                                 <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(0,0,0,0.2)', paddingBottom: '4px', fontWeight: 'bold', fontSize: '0.875rem' }}>
-                                    <span>Difficulty</span><span>Beginner</span>
+                                    <span>Difficulty</span><span>{enrichment[item.id]?.difficulty ?? 'Beginner'}</span>
                                 </li>
+                                {enrichment[item.id]?.operatingVoltage && <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(0,0,0,0.2)', paddingBottom: '4px', fontWeight: 'bold', fontSize: '0.875rem' }}>
+                                    <span>Voltage</span><span>{enrichment[item.id].operatingVoltage}</span>
+                                </li>}
+                                {enrichment[item.id]?.communication && <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(0,0,0,0.2)', paddingBottom: '4px', fontWeight: 'bold', fontSize: '0.875rem' }}>
+                                    <span>Protocol</span><span>{enrichment[item.id].communication}</span>
+                                </li>}
                             </ul>
                         </div>
+
+                        {/* Compatible With */}
+                        {enrichment[item.id]?.compatibleWith && (
+                            <div style={{ backgroundColor: '#e8f5e9', border: '3px solid black', borderRadius: '12px', padding: '20px', boxShadow: '4px 4px 0 0 #000' }}>
+                                <h3 style={{ fontWeight: 900, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.1rem', marginTop: 0 }}>
+                                    🔗 Works With
+                                </h3>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                    {enrichment[item.id].compatibleWith.map((c, i) => (
+                                        <span key={i} style={{ backgroundColor: 'white', border: '2px solid black', borderRadius: '20px', padding: '4px 10px', fontSize: '0.75rem', fontWeight: 'bold' }}>{c}</span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
-                    {/* Right Column: Description & Code/Syntax */}
+                    {/* Right Column: Description, Specs, Tips, Warnings, Syntax */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                        {/* Equipment Log */}
                         <section>
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '16px', marginTop: 0 }}>Equipment Log</h2>
+                            <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '16px', marginTop: 0 }}>📋 Equipment Log</h2>
                             <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: '#333', margin: 0 }}>{item.description}</p>
                         </section>
 
+                        {/* Technical Specs Table */}
+                        {enrichment[item.id]?.specs && (
+                            <section>
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>📐 Technical Specifications</h2>
+                                <div style={{ border: '3px solid black', borderRadius: '12px', overflow: 'hidden', boxShadow: '4px 4px 0 0 #000' }}>
+                                    {Object.entries(enrichment[item.id].specs).map(([key, value], idx) => (
+                                        <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 16px', fontWeight: 'bold', fontSize: '0.875rem', borderBottom: idx < Object.entries(enrichment[item.id].specs).length - 1 ? '1px solid rgba(0,0,0,0.15)' : 'none', backgroundColor: idx % 2 === 0 ? 'white' : '#f8f8f8' }}>
+                                            <span style={{ color: '#666' }}>{key}</span>
+                                            <span style={{ textAlign: 'right' }}>{value}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Use Cases */}
+                        {enrichment[item.id]?.useCases && (
+                            <section>
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>🌍 Real-World Use Cases</h2>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                    {enrichment[item.id].useCases.map((uc, i) => (
+                                        <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '10px 14px', backgroundColor: 'white', border: '2px solid black', borderRadius: '10px', fontSize: '0.95rem', fontWeight: 'bold' }}>
+                                            <span style={{ flexShrink: 0 }}>→</span>
+                                            <span>{uc}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Pro Tips */}
+                        {enrichment[item.id]?.tips && (
+                            <section>
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>💡 Pro Tips</h2>
+                                <div style={{ backgroundColor: '#e8f5e9', border: '3px solid black', borderRadius: '12px', padding: '20px', boxShadow: '4px 4px 0 0 #000' }}>
+                                    <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                        {enrichment[item.id].tips.map((tip, i) => (
+                                            <li key={i} style={{ display: 'flex', gap: '10px', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                                                <span style={{ flexShrink: 0, fontWeight: 900 }}>✓</span>
+                                                <span>{tip}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Warnings */}
+                        {enrichment[item.id]?.warnings && (
+                            <section>
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>⚠️ Warnings & Precautions</h2>
+                                <div style={{ backgroundColor: '#fff3e0', border: '3px solid black', borderRadius: '12px', padding: '20px', boxShadow: '4px 4px 0 0 #000' }}>
+                                    <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                        {enrichment[item.id].warnings.map((warn, i) => (
+                                            <li key={i} style={{ display: 'flex', gap: '10px', fontSize: '0.95rem', lineHeight: 1.5, color: '#b71c1c' }}>
+                                                <span style={{ flexShrink: 0, fontWeight: 900 }}>⚡</span>
+                                                <span>{warn}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Syntax */}
                         <section>
                             <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px', marginTop: '16px' }}>
                                 💻 Necessary Syntax
                             </h2>
-
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                                 {item.syntax.map((block, idx) => (
                                     <div key={idx} style={{ borderRadius: '12px', overflow: 'hidden', border: '3px solid black', boxShadow: '6px 6px 0 0 #000' }}>
