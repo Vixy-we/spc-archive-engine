@@ -30,19 +30,11 @@ export default async function TechPage(props: TechPageProps) {
             <div className="hero">
                 <div style={{ textAlign: "center", marginBottom: "40px", position: "relative" }}>
                     <Link
-                        href="/"
-                        style={{
-                            position: "absolute",
-                            top: "-40px",
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            color: "#666",
-                            textDecoration: "underline",
-                        }}
+                        href="/tech"
+                        className="pill-back-btn"
                     >
-                        ← back to home
+                        ← back to fields
                     </Link>
-
                     <h1>{data.title}</h1>
                     <p style={{ marginTop: '10px', fontSize: '1.2rem', color: '#555', maxWidth: '600px', marginInline: 'auto' }}>
                         {data.description}

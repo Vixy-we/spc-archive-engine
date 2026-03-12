@@ -9,20 +9,6 @@ export default function Home() {
     <div>
       <div className="hero">
         <div style={{ textAlign: "center", marginBottom: "40px", position: "relative" }}>
-          <Link
-            href="#"
-            style={{
-              position: "absolute",
-              top: "-40px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              color: "#666",
-              textDecoration: "underline",
-            }}
-          >
-            ← back to robotics
-          </Link>
-
           <h1>robotics study guides</h1>
         </div>
       </div>

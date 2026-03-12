@@ -5,20 +5,22 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="logo">
                 <Link href="/" style={{ textDecoration: 'none' }}>
-                    <div className="logo-bubble">fiveable</div>
+                    <div className="logo-bubble">Solarpunk<br/>Corps</div>
                 </Link>
             </div>
 
             <div className="nav-center">
                 <div className="nav-item">
-                    <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <span>✨ study content for ap students</span>
+                    <Link href="/handbook-digest" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <span>📚 Handbook Digest</span>
                     </Link>
                     {/* Removed chevron as it's now a direct link */}
                 </div>
                 <div className="nav-item">
-                    <span>🛠 tech stacks</span>
-                    <span className="chevron">▼</span>
+                    <Link href="/tech" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        <span>🛠 tech stacks</span>
+                        <span className="chevron">▼</span>
+                    </Link>
                     <div className="dropdown-menu">
                         <Link href="/tech/cs" className="dropdown-item">💻 computer science</Link>
                         <Link href="/tech/mechanical" className="dropdown-item">⚙️ mechanical</Link>
@@ -39,12 +41,13 @@ export default function Navbar() {
 
             <div className="nav-right">
                 <div className="nav-item">
-                    <span>🎒 my subjects</span>
+                    <span>🎒 study guide</span>
                     <span className="chevron">▼</span>
                     <div className="dropdown-menu" style={{ right: 0, left: 'auto' }}>
-                        <Link href="#" className="dropdown-item">📐 math</Link>
-                        <Link href="#" className="dropdown-item">🧪 science</Link>
-                        <Link href="#" className="dropdown-item">📜 history</Link>
+                        <Link href="/study/robotics" className="dropdown-item">🤖 Robotics</Link>
+                        <Link href="/study/ai-ml" className="dropdown-item">🧠 AI ML</Link>
+                        <Link href="/study/sustainability" className="dropdown-item">🌿 Sustainability</Link>
+                        <Link href="/study/emerging-tech" className="dropdown-item">🚀 Emerging Tech</Link>
                     </div>
                 </div>
                 <Link href="#" className="upgrade-btn">upgrade</Link>

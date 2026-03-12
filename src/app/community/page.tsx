@@ -67,14 +67,7 @@ export default function CommunityPage() {
                 <div style={{ textAlign: "center", marginBottom: "40px", position: "relative" }}>
                     <Link
                         href="/"
-                        style={{
-                            position: "absolute",
-                            top: "-40px",
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            color: "#666",
-                            textDecoration: "underline",
-                        }}
+                        className="pill-back-btn"
                     >
                         ← back to home
                     </Link>

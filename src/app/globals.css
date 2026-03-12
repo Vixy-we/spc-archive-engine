@@ -97,6 +97,12 @@ body {
   border-radius: 6px;
   font-size: 1.2rem;
   position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.logo-bubble:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
 }
 
 .logo-bubble::after {
@@ -201,7 +207,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 120px 20px 80px 20px;
 }
 
 /* Hero */
@@ -647,6 +653,29 @@ body {
   align-items: center;
   gap: 6px;
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.pill-back-btn {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: black;
+    text-decoration: none;
+    background: #e0cbfb;
+    padding: 6px 16px;
+    border-radius: 50px;
+    border: 2px solid black;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 2px 2px 0px rgba(0,0,0,1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pill-back-btn:hover {
+    transform: translate(-50%, -2px);
+    box-shadow: 4px 4px 0px rgba(0,0,0,1);
+    background-color: #d8b4fe;
 }
 
 /* Career Grid */
