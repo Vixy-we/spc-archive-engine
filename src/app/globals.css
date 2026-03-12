@@ -157,7 +157,7 @@ body {
   gap: 20px;
 }
 
-.upgrade-btn {
+.contact-btn {
   background-color: black;
   color: white;
   padding: 8px 16px;
@@ -165,6 +165,158 @@ body {
   font-weight: 700;
   text-decoration: none;
   font-size: 0.9rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+}
+
+/* ── Hamburger Button (mobile only) ── */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 3px;
+  background: black;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-line.open:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger-line.open:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-line.open:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ── Mobile Overlay ── */
+.mobile-overlay {
+  display: none;
+}
+
+/* ── Nav mobile footer (hidden on desktop) ── */
+.nav-mobile-footer {
+  display: none;
+}
+
+/* ── Mobile-only and Desktop-only toggles ── */
+.mobile-only-nav {
+  display: none;
+}
+
+.desktop-only-nav {
+  display: flex;
+  gap: 25px;
+}
+
+@media (max-width: 768px) {
+  .mobile-only-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .desktop-only-nav {
+    display: none;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 18px 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: black;
+    text-decoration: none;
+    border-bottom: 2px solid #eee;
+    text-transform: capitalize;
+  }
+
+  .mobile-nav-link:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ── Mobile Responsive Navbar ── */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.6rem 1rem;
+  }
+
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .nav-center {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    padding: 80px 24px 32px;
+    margin-left: 0;
+    gap: 0;
+    border-left: 3px solid black;
+    box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+    transition: right 0.35s ease;
+    z-index: 1050;
+    overflow-y: auto;
+  }
+
+  .nav-center.mobile-open {
+    right: 0;
+  }
+
+  /* Remove old nav-item adjustments that are no longer needed for the simplified mobile menu */
+  .nav-center .nav-item {
+    display: none; 
+  }
+
+  .nav-right {
+    display: none;
+  }
+
+  .nav-mobile-footer {
+    display: none; /* Removed footer as contact is now in the main list */
+  }
+
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1040;
+  }
+}
+
+/* ── Mobile Responsive Hero Page ── */
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .span-3 {
+    grid-column: span 1;
+  }
 }
 
 .icon-btn {
