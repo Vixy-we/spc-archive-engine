@@ -1,25 +1,40 @@
+'use client';
+
 import Link from 'next/link';
 import { Search } from 'lucide-react';
+import { useRef } from 'react';
 
 export default function Home() {
+    const lastPlayedRef = useRef<number>(0);
+
+    const playAudio = () => {
+        const now = Date.now();
+        if (now - lastPlayedRef.current < 5000) return;
+
+        lastPlayedRef.current = now;
+        const audio = new Audio('/initiative.wav');
+        audio.play().catch(err => console.error("Audio playback failed:", err));
+    };
+
     return (
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px', display: 'flex', flexDirection: 'column', gap: '80px' }}>
 
             {/* Hero Section */}
             <div style={{ textAlign: "center", display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <span style={{
-                    backgroundColor: '#e8dff5',
-                    border: '2px solid black',
-                    borderRadius: '9999px',
-                    padding: '8px 16px',
-                    fontSize: '0.875rem',
-                    fontWeight: 'bold',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
-                    marginBottom: '24px'
-                }}>
+                <span
+                    className="initiative-pill"
+                    onClick={playAudio}
+                    style={{
+                        backgroundColor: '#e8dff5',
+                        padding: '8px 20px',
+                        fontSize: '0.875rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: '24px',
+                        cursor: 'pointer'
+                    }}
+                >
                     🌱 An Initiative of Solarpunk Corps
                 </span>
 
@@ -33,14 +48,7 @@ export default function Home() {
                     sustainability concepts into bite-sized, accessible learning modules.
                 </p>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
-                    <Link href="/study" className="action-btn" style={{ backgroundColor: '#e1ccfa', color: 'black', padding: '12px 24px', fontSize: '1.1rem' }}>
-                        Start Learning
-                    </Link>
-                    <button className="action-btn" style={{ backgroundColor: 'white', color: 'black', padding: '12px 24px', fontSize: '1.1rem' }}>
-                        <Search size={20} style={{ marginRight: '8px' }} /> Search Archive
-                    </button>
-                </div>
+                {/* Action buttons removed as per request */}
             </div>
 
             {/* Navigation Bento Grid */}

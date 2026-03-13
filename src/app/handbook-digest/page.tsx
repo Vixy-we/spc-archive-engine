@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { Search } from 'lucide-react';
 import { enrichment } from '@/lib/handbookEnrichment';
 
 // Enriched data model matching references/menu.jsx
@@ -280,12 +281,23 @@ function DetailView({ item, categoryIcon, categoryName, onBack }: { item: Hardwa
 
 export default function HandbookDigestPage() {
     const [selectedItem, setSelectedItem] = useState<{ item: HardwareItem, categoryIcon: string, categoryName: string } | null>(null);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredData = hardwareData.map(category => ({
+        ...category,
+        items: category.items.filter(item => 
+            item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.shortName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.badge.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    })).filter(category => category.items.length > 0);
 
     return (
         <div>
             {/* Hero Section */}
-            <div className="hero">
-                <div style={{ textAlign: "center", marginBottom: "40px", position: "relative" }}>
+            <div className="hero" style={{ position: 'relative', marginBottom: '60px' }}>
+                <div style={{ textAlign: "center", position: "relative" }}>
                     <Link
                         href="/"
                         className="pill-back-btn"
@@ -294,9 +306,70 @@ export default function HandbookDigestPage() {
                     </Link>
 
                     <h1>handbook digest</h1>
-                    <p style={{ marginTop: '10px', fontSize: '1.2rem', color: '#555', maxWidth: '600px', marginInline: 'auto' }}>
+                    <p style={{ fontSize: '1.2rem', color: '#555', maxWidth: '600px', marginInline: 'auto' }}>
                         Your ultimate component guide for electronics, robotics, and solarpunk prototyping.
                     </p>
+
+                    {/* Search Archive Input - Positioned in the Top-Right Corner */}
+                    <div style={{ 
+                        position: 'absolute',
+                        right: '0',
+                        top: '0',
+                        zIndex: 10
+                    }}>
+                        <div style={{ position: 'relative', display: 'flex' }} className="desktop-only-nav">
+                            <input 
+                                type="text"
+                                placeholder="Search..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="action-btn" 
+                                style={{ 
+                                    backgroundColor: 'white', 
+                                    color: 'black', 
+                                    padding: '10px 12px 10px 40px', 
+                                    fontSize: '0.85rem',
+                                    width: '200px', // Slightly narrower for corner placement
+                                    textAlign: 'left',
+                                    justifyContent: 'flex-start',
+                                    boxShadow: '4px 4px 0px rgba(0,0,0,1)'
+                                }}
+                            />
+                            <Search 
+                                size={18} 
+                                style={{ 
+                                    position: 'absolute', 
+                                    left: '12px', 
+                                    top: '50%', 
+                                    transform: 'translateY(-50%)',
+                                    opacity: 0.6,
+                                    pointerEvents: 'none'
+                                }} 
+                            />
+                            {searchQuery && (
+                                <button 
+                                    onClick={() => setSearchQuery('')}
+                                    style={{
+                                        position: 'absolute',
+                                        right: '12px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        background: 'none',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        fontSize: '1rem',
+                                        padding: '2px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        opacity: 0.5
+                                    }}
+                                >
+                                    ✕
+                                </button>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -305,99 +378,114 @@ export default function HandbookDigestPage() {
                 {!selectedItem ? (
                     /* --- LIST VIEW --- */
                     <div>
-                        {hardwareData.map((categoryData, i) => (
-                            <div key={i} style={{ marginBottom: '60px' }}>
-                                {/* Category Header */}
-                                <div style={{
-                                    display: 'inline-block',
-                                    backgroundColor: 'white',
-                                    border: '3px solid black',
-                                    padding: '12px 24px',
-                                    borderRadius: '16px',
-                                    boxShadow: '4px 4px 0 0 #000',
-                                    marginBottom: '32px',
-                                    transform: 'rotate(-1deg)'
-                                }}>
-                                    <h2 style={{
-                                        fontSize: '1.5rem',
-                                        fontWeight: 900,
-                                        letterSpacing: '-0.5px',
-                                        margin: 0
+                        {filteredData.length > 0 ? (
+                            filteredData.map((categoryData, i) => (
+                                <div key={i} style={{ marginBottom: '60px' }}>
+                                    {/* Category Header */}
+                                    <div style={{
+                                        display: 'inline-block',
+                                        backgroundColor: 'white',
+                                        border: '3px solid black',
+                                        padding: '12px 24px',
+                                        borderRadius: '16px',
+                                        boxShadow: '4px 4px 0 0 #000',
+                                        marginBottom: '32px',
+                                        transform: 'rotate(-1deg)'
                                     }}>
-                                        {categoryData.category}
-                                    </h2>
-                                </div>
+                                        <h2 style={{
+                                            fontSize: '1.5rem',
+                                            fontWeight: 900,
+                                            letterSpacing: '-0.5px',
+                                            margin: 0
+                                        }}>
+                                            {categoryData.category}
+                                        </h2>
+                                    </div>
 
-                                {/* Equipment Grid */}
-                                <div className="handbook-grid">
-                                    {categoryData.items.map((item) => (
-                                        <div
-                                            key={item.id}
-                                            onClick={() => setSelectedItem({ item, categoryIcon: categoryData.category.split(' ')[0], categoryName: categoryData.categoryKey.replace(/_/g, ' ') })}
-                                            className="handbook-card"
-                                        >
-                                            {/* Colored Square Box */}
-                                            <div style={{
-                                                width: '96px',
-                                                height: '96px',
-                                                flexShrink: 0,
-                                                borderRadius: '12px',
-                                                border: '3px solid black',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.875rem',
-                                                textAlign: 'center',
-                                                padding: '8px',
-                                                backgroundColor: item.color
-                                            }}>
-                                                {item.shortName}
-                                            </div>
-
-                                            {/* Text Content */}
-                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', flexGrow: 1 }}>
-                                                <h3 style={{ fontSize: '1.2rem', fontWeight: 900, lineHeight: 1.2, margin: 0 }}>
-                                                    {item.name}
-                                                </h3>
-                                                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                                                    <span style={{
-                                                        background: item.color,
-                                                        padding: '4px 12px',
-                                                        borderRadius: '20px',
-                                                        fontSize: '0.75rem',
-                                                        fontWeight: 'bold',
-                                                        border: '1px solid black',
-                                                        display: 'inline-block'
-                                                    }}>
-                                                        {item.badge}
-                                                    </span>
-                                                    <span style={{
-                                                        background: '#1e1e2e',
-                                                        color: '#a6accd',
-                                                        padding: '4px 12px',
-                                                        borderRadius: '20px',
-                                                        fontSize: '0.75rem',
-                                                        fontWeight: 'bold',
-                                                        display: 'inline-block'
-                                                    }}>
-                                                        💰 {item.price}
-                                                    </span>
+                                    {/* Equipment Grid */}
+                                    <div className="handbook-grid">
+                                        {categoryData.items.map((item) => (
+                                            <div
+                                                key={item.id}
+                                                onClick={() => setSelectedItem({ item, categoryIcon: categoryData.category.split(' ')[0], categoryName: categoryData.categoryKey.replace(/_/g, ' ') })}
+                                                className="handbook-card"
+                                            >
+                                                {/* Colored Square Box */}
+                                                <div style={{
+                                                    width: '96px',
+                                                    height: '96px',
+                                                    flexShrink: 0,
+                                                    borderRadius: '12px',
+                                                    border: '3px solid black',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.875rem',
+                                                    textAlign: 'center',
+                                                    padding: '8px',
+                                                    backgroundColor: item.color
+                                                }}>
+                                                    {item.shortName}
                                                 </div>
-                                                {enrichment[item.id]?.oneLiner && (
-                                                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#555', lineHeight: 1.4 }}>
-                                                        {enrichment[item.id].oneLiner}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
 
-                                {/* Section Divider */}
-                                <div style={{ width: '100%', borderBottom: '3px solid black', marginTop: '60px', opacity: 0.5 }}></div>
+                                                {/* Text Content */}
+                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', flexGrow: 1 }}>
+                                                    <h3 style={{ fontSize: '1.2rem', fontWeight: 900, lineHeight: 1.2, margin: 0 }}>
+                                                        {item.name}
+                                                    </h3>
+                                                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                                                        <span style={{
+                                                            background: item.color,
+                                                            padding: '4px 12px',
+                                                            borderRadius: '20px',
+                                                            fontSize: '0.75rem',
+                                                            fontWeight: 'bold',
+                                                            border: '1px solid black',
+                                                            display: 'inline-block'
+                                                        }}>
+                                                            {item.badge}
+                                                        </span>
+                                                        <span style={{
+                                                            background: '#1e1e2e',
+                                                            color: '#a6accd',
+                                                            padding: '4px 12px',
+                                                            borderRadius: '20px',
+                                                            fontSize: '0.75rem',
+                                                            fontWeight: 'bold',
+                                                            display: 'inline-block'
+                                                        }}>
+                                                            💰 {item.price}
+                                                        </span>
+                                                    </div>
+                                                    {enrichment[item.id]?.oneLiner && (
+                                                        <p style={{ margin: 0, fontSize: '0.85rem', color: '#555', lineHeight: 1.4 }}>
+                                                            {enrichment[item.id].oneLiner}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Section Divider */}
+                                    <div style={{ width: '100%', borderBottom: '3px solid black', marginTop: '60px', opacity: 0.5 }}></div>
+                                </div>
+                            ))
+                        ) : (
+                            <div style={{ textAlign: 'center', padding: '80px 20px', backgroundColor: 'white', border: '3px solid black', borderRadius: '24px', boxShadow: '8px 8px 0px rgba(0,0,0,1)' }}>
+                                <div style={{ fontSize: '4rem', marginBottom: '20px' }}>🔍</div>
+                                <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '10px' }}>No components found</h2>
+                                <p style={{ fontSize: '1.2rem', color: '#666' }}>We couldn't find any equipment matching "{searchQuery}"</p>
+                                <button 
+                                    onClick={() => setSearchQuery('')}
+                                    className="action-btn"
+                                    style={{ margin: '30px auto 0', backgroundColor: '#e1ccfa', padding: '12px 24px' }}
+                                >
+                                    Clear Search
+                                </button>
                             </div>
-                        ))}
+                        )}
                     </div>
                 ) : (
                     /* --- DETAIL VIEW --- */

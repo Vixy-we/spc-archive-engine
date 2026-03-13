@@ -43,7 +43,7 @@ export default function Navbar() {
                     <Link href="/community" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>
                         community
                     </Link>
-                    <Link href="/contact" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>
+                    <Link href="/contacts" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>
                         contact
                     </Link>
                 </div>
@@ -91,7 +91,7 @@ export default function Navbar() {
                         <Link href="/study/emerging-tech" className="dropdown-item">🚀 Emerging Tech</Link>
                     </div>
                 </div>
-                <Link href="/contact" className="contact-btn">contact</Link>
+                <Link href="/contacts" className="contact-btn">contact</Link>
                 <div className="icon-btn">⚙️</div>
             </div>
         </nav>

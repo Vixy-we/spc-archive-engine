@@ -921,6 +921,24 @@ html {
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
+.initiative-pill {
+    border: 2px solid black;
+    border-radius: 9999px;
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+    transition: all 0.2s ease;
+    font-weight: 800 !important;
+}
+
+.initiative-pill:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+}
+
+.initiative-pill:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px 0px rgba(0,0,0,1);
+}
+
 .pill-back-btn {
     position: absolute;
     top: -40px;
